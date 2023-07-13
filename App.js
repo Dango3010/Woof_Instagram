@@ -35,10 +35,11 @@
 // });
 
 import React, {useState} from 'react';
-import { Button, Text, View, ScrollView } from 'react-native';
+import { Button, Text, View, ScrollView, TextInput } from 'react-native';
 
 const App = () => {
   const [pressedButton, setPressedButton] = useState(0);
+  const [name, setName] = useState('');
 
   return (
    <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -66,6 +67,15 @@ const App = () => {
         <Button
           title='Reset!'
           onPress={() => setPressedButton(0)}
+        />
+
+        <Text>
+          {name ? `hi, ${name}` : "What's your name?"}
+        </Text>
+        
+        <TextInput
+          onChangeText={text => setName(text)}
+          secureTextEntry={true}
         />
       </ScrollView>
     </View>
