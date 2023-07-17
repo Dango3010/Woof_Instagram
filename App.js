@@ -3,34 +3,46 @@ import { View, Text, TextInput } from 'react-native';
 import { Button } from 'react-native-web';
 
 const App = () => (
-  <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#ecf0f1' }}>
-  <Text>Registration</Text>
+  <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#ecf0f1'}}>
+  <Text style={{fontSize: 18}}>Registration</Text>
     <Input 
-      placeholder='name of user'
+      title='Name of user'
+      placeholder='John Smith'
       dataKey='userName'
     />
     <Input 
-      placeholder='email'
+      title='email'
+      placeholder="aa@gmail.com"
       dataKey='email'
     />
     <Input 
-      placeholder='password'
+      title='password'
+      placeholder='empty'
       dataKey='password'
     />
     <Input 
-      placeholder='pet Name'
+      title='type your password again'
+      placeholder='empty'
+      dataKey='passwordAgain'
+    />
+    <Input 
+      title='Your Pet Name'
+      placeholder='empty'
       dataKey='petName'
     />
     <Input 
-      placeholder="pet's birthdate"
+      title="Your pet's birthdate"
+      placeholder='empty'
       dataKey='petBirthDate'
     />
     <Input 
-      placeholder='breed'
+      title="Your pet's breed"
+      placeholder='empty'
       dataKey='breed'
     />
     <Input 
-      placeholder="pet's favourite toy"
+      title="your pet's favourite toy"
+      placeholder='empty'
       dataKey='FavouriteToy'
     />
   </View>
@@ -41,6 +53,7 @@ export const Input = (props) => {
     userName: '',
     email: '',
     password: '',
+    passwordAgain: '',
     petName: '',
     petBirthDate: '',
     breed: '',
@@ -48,13 +61,16 @@ export const Input = (props) => {
   });
 
   return (
-    <View>
-      {props.dataKey === 'userName' && 
-        <Text>{data.userName ? `Hi! ${data.userName}` : 'Hi! What is your name?'}</Text>
-      }
+    <View style={{padding: 16}}>
+      <Text style={{padding: 8, fontSize: 18}}>
+      {data.userName 
+      ? `Hi! ${data.userName}` 
+      : props.title}
+      </Text>
       <TextInput
+        style={{padding: 8, fontSize: 18}}
         value={data[props.dataKey]}
-        secureTextEntry={props.dataKey === 'password'}
+        secureTextEntry={props.dataKey === 'password' | props.dataKey === 'passwordAgain'}
         placeholder={props.placeholder}
         onChangeText={text => {
           setData(prev => ({
