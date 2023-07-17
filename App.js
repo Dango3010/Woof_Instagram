@@ -9,6 +9,30 @@ const App = () => (
       placeholder='name of user'
       dataKey='userName'
     />
+    <Input 
+      placeholder='email'
+      dataKey='email'
+    />
+    <Input 
+      placeholder='password'
+      dataKey='password'
+    />
+    <Input 
+      placeholder='pet Name'
+      dataKey='petName'
+    />
+    <Input 
+      placeholder="pet's birthdate"
+      dataKey='petBirthDate'
+    />
+    <Input 
+      placeholder='breed'
+      dataKey='breed'
+    />
+    <Input 
+      placeholder="pet's favourite toy"
+      dataKey='FavouriteToy'
+    />
   </View>
 );
 
@@ -25,9 +49,12 @@ export const Input = (props) => {
 
   return (
     <View>
-      <Text>{data[props.dataKey] ? `Hi! ${data[props.dataKey]}` : 'Hi! What is your name?'}</Text>
+      {props.dataKey === 'userName' && 
+        <Text>{data.userName ? `Hi! ${data.userName}` : 'Hi! What is your name?'}</Text>
+      }
       <TextInput
         value={data[props.dataKey]}
+        secureTextEntry={props.dataKey === 'password'}
         placeholder={props.placeholder}
         onChangeText={text => {
           setData(prev => ({
@@ -35,10 +62,6 @@ export const Input = (props) => {
             [props.dataKey] : text
           }))
         }}
-      />
-      <Button
-        title='press ehhh'
-        onPress={() => console.log(data)}
       />
     </View>
   )
