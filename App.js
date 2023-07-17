@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import { View, Text, TextInput, ScrollView } from 'react-native';
-import { Button } from 'react-native-web';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Input from './src/components/Form';
 
-const App = () => (
-  <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#ecf0f1'}}>
-    <Text style={{fontSize: 18, marginTop: 50}}>Registration</Text>
-    <ScrollView>
+export default function App() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#ecf0f1'}}>
+      <Text style={{fontSize: 18, marginTop: 50}}>Registration</Text>
+      <ScrollView>
         <Input 
           title='Name of user'
           placeholder='John Smith'
@@ -46,44 +47,7 @@ const App = () => (
           placeholder='empty'
           dataKey='FavouriteToy'
         />
-    </ScrollView>
-  </View>
-);
-
-export const Input = (props) => {
-  const [data, setData] = useState({
-    userName: '',
-    email: '',
-    password: '',
-    passwordAgain: '',
-    petName: '',
-    petBirthDate: '',
-    breed: '',
-    FavouriteToy: ''
-  });
-
-  return (
-    <View style={{padding: 16}}>
-      <Text style={{padding: 8, fontSize: 18}}>
-      {data.userName 
-      ? `Hi! ${data.userName}` 
-      : props.title}
-      </Text>
-      <TextInput
-        style={{padding: 8, fontSize: 18}}
-        value={data[props.dataKey]}
-        secureTextEntry={props.dataKey === 'password' || props.dataKey === 'passwordAgain'}
-        placeholder={props.placeholder}
-        onChangeText={text => {
-          setData(prev => ({
-            ...prev,
-            [props.dataKey] : text
-          }))
-        }}
-      />
+      </ScrollView>
     </View>
-  )
+  );
 }
-
-export default App;
-
