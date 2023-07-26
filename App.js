@@ -1,25 +1,27 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView } from 'react-native';
 import {Formik, FieldArray, ErrorMessage} from 'formik';
 
 export default function App() {
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Required';
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+    ) {
+      errors.email = 'Invalid Email Address';
+    } 
+    return errors;
+  }
   
   return (
     <ScrollView style={{backgroundColor: '#ecf0f1'}}>
       <Text style={{marginTop: 50, fontSize: 20, textAlign: 'center'}}>Registration</Text>
         <Formik
           initialValues={{email: '', password: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
-          validate={values => {
-            const errors = {};
-            if (!values.email) {
-              errors.email = 'Required';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'Invalid Email Address';
-            }
-            return errors;
-          }}
+          validate={validate}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -31,20 +33,65 @@ export default function App() {
           <View>
               <InputWithLabel
                 label="Email"
+                name='email'
                 placeholder='Enter your email here'
                 value={values.email}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
               />
-              <ErrorMessage style={{marginLeft: 40}} name='email' component={Text}/>
+              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='email' component={Text}/>
+              
               <InputWithLabel
-                label='password'
+                label='Password'
+                name='password'
                 placeholder="Type your password here"
                 value={values.password}
                 onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
                 secureTextEntry
               />
-              <ErrorMessage name='password' component={Text}/>
+              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='password' component={Text}/>
+
+              <InputWithLabel
+                label='Confirm Password'
+                placeholder="Re-type your password here"
+                secureTextEntry
+              />
+              {/* <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='password' component={Text}/>
+                Passwords do not match, please try again. */}
+
+              <InputWithLabel
+                label="Name"
+                name='petName'
+                placeholder="Type your dog's name here"
+                value={values.petName}
+                onChangeText={handleChange('petName')}
+              />
+              
+              <InputWithLabel
+                label='Birthday'
+                name='petBirthDate'
+                placeholder="Type your dog's date of birth here"
+                value={values.petBirthDate}
+                onChangeText={handleChange('petBirthDate')}
+              />
+
+              <InputWithLabel
+                label='Breed'
+                name='breed'
+                placeholder="Type your dog's breed here"
+                value={values.breed}
+                onChangeText={handleChange('breed')}
+              />
+
+              <InputWithLabel
+                label='Favourite toy'
+                name='favouriteToy'
+                placeholder="Type your dog's favorite toy here"
+                value={values.favouriteToy}
+                onChangeText={handleChange('favouriteToy')}
+              />
+
               <Button
                 title='Submit'
                 onPress={handleSubmit}
@@ -57,12 +104,6 @@ export default function App() {
   );
 };
 
-function confirmPassword (confirmPass, originalPassword) {
-  confirmPass === originalPassword 
-  ? true 
-  : alert("Passwords do not match, please try again.");
-};
-
 const InputWithLabel = (props) => {
   return (
     <View style={{ padding: 16 }}>
@@ -71,12 +112,12 @@ const InputWithLabel = (props) => {
       </Text>
       <TextInput
         style={{padding: 8, fontSize: 16, marginLeft: 10}}
-        placeholder={props.placeholder}
+        name={props.name}
         onChangeText={props.onChangeText}
         value={props.value}
+        placeholder={props.placeholder}
         onBlur={props.onBlur}
         secureTextEntry={props.secureTextEntry}
-        onSubmitEditing={props.onSubmitEditing}
       />
     </View>
   );
