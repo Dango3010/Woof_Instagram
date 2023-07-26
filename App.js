@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
-import {Formik, Field, Form, FieldArray, ErrorMessage} from 'formik';
+import { View, Text, TextInput, StyleSheet, Button, ScrollView } from 'react-native';
+import {Formik, FieldArray, ErrorMessage} from 'formik';
 
 export default function App() {
   
   return (
     <ScrollView style={{backgroundColor: '#ecf0f1'}}>
-      <Text style={{fontSize: 20, marginTop: 50}}>Registration</Text>
+      <Text style={{marginTop: 50, fontSize: 20, textAlign: 'center'}}>Registration</Text>
         <Formik
           initialValues={{email: '', password: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
           validate={values => {
@@ -27,81 +27,32 @@ export default function App() {
             }, 400);
           }}
         >
-        {({isSubmitting}) => (
-          <Form style={{padding: 16, flex: 1}}>
-          
-            <div className='row'>
-              <div className='col'>
-                <label 
-                  style={{padding: 8, fontSize: 20}}
-                  htmlFor="firstName"
-                >
-                  Email
-                </label>
-                <Field 
-                  style={styles.field}
-                  type='email' 
-                  name='email' 
-                  placeholder='Enter your email here'
-                  />
-              </div>
-                <ErrorMessage name='email' component='div'/>
-
-              <div className='col'>
-                <Field 
-                  style={styles.field}
-                  type='password' 
-                  name='password' 
-                />
-                <ErrorMessage name='password' component='div'/>
-              </div>
-
-              <div className='col'>
-                <Field 
-                  style={styles.field}
-                  type='petName' 
-                  name='petName' 
-                />
-              </div>
-
-              <div className='col'>
-                <Field 
-                  type='petBirthDate' 
-                  name='petBirthDate'
-                  style={styles.field}  
-                />
-              </div>
-
-              <div className='col'>
-                <Field 
-                  type='breed' 
-                  name='breed' 
-                  style={styles.field}  
-                />
-              </div>
-
-              <div className='col'>
-                <Field 
-                  type='favouriteToy' 
-                  name='favouriteToy' 
-                  style={styles.field}
-                />
-              </div>
-
-              <div className='col'>
-                <button 
-                  type='submit' 
-                  disabled={isSubmitting}
-                  style={styles.field}
-                >
-                  Submit
-                </button>
-              </div>
-
-            </div>
-          </Form>
+        {({handleChange, handleBlur, handleSubmit, values, handleReset, isSubmitting}) => (
+          <View>
+              <InputWithLabel
+                label="Email"
+                placeholder='Enter your email here'
+                value={values.email}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+              />
+              <ErrorMessage style={{marginLeft: 40}} name='email' component={Text}/>
+              <InputWithLabel
+                label='password'
+                placeholder="Type your password here"
+                value={values.password}
+                onChangeText={handleChange('password')}
+                secureTextEntry
+              />
+              <ErrorMessage name='password' component={Text}/>
+              <Button
+                title='Submit'
+                onPress={handleSubmit}
+                disabled={isSubmitting}
+              />
+          </View>
         )}
-        </Formik>
+      </Formik>
     </ScrollView>
   );
 };
@@ -112,11 +63,24 @@ function confirmPassword (confirmPass, originalPassword) {
   : alert("Passwords do not match, please try again.");
 };
 
-const styles = StyleSheet.create({
-  field: {
-    padding: 8, 
-    fontSize: 18,
-    margin: 10
-  }
-})
+const InputWithLabel = (props) => {
+  return (
+    <View style={{ padding: 16 }}>
+      <Text style={{padding: 8, fontSize: 18, marginLeft: 10}}>
+        {props.label}
+      </Text>
+      <TextInput
+        style={{padding: 8, fontSize: 16, marginLeft: 10}}
+        placeholder={props.placeholder}
+        onChangeText={props.onChangeText}
+        value={props.value}
+        onBlur={props.onBlur}
+        secureTextEntry={props.secureTextEntry}
+        onSubmitEditing={props.onSubmitEditing}
+      />
+    </View>
+  );
+};
+
+
 
