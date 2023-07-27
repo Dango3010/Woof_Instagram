@@ -1,13 +1,13 @@
-import React from 'react';
-import { View, Text, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
-import {Formik, ErrorMessage} from 'formik';
 import { AntDesign } from '@expo/vector-icons';
+import { ErrorMessage, Formik } from 'formik';
+import React from 'react';
+import { Button, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import * as Yup from 'yup';
 
 export default function App() {
   
   return (
-    <ScrollView style={{backgroundColor: '#ecf0f1'}}>
+    <ScrollView style={{flex: 1, backgroundColor: '#ecf0f1'}}>
       <Text style={{marginTop: 50, fontSize: 20, textAlign: 'center'}}>Registration</Text>
         <Formik
           initialValues={{email: '', password: '', confirmPassword: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
@@ -29,7 +29,7 @@ export default function App() {
             }, 400);
           }}
         >
-        {({handleChange, handleBlur, handleSubmit, values, handleReset, isSubmitting}) => (
+        {({handleChange, handleBlur, handleSubmit, values, handleReset, isSubmitting, errors, touched}) => (
           <View>
               <InputWithLabel
                 label="Email"
@@ -38,6 +38,8 @@ export default function App() {
                 value={values.email}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
+                errors={errors}
+                touched={touched}
               />
               
               <InputWithLabel
@@ -48,6 +50,8 @@ export default function App() {
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 secureTextEntry
+                errors={errors}
+                touched={touched}
               />
 
               <InputWithLabel
@@ -57,6 +61,8 @@ export default function App() {
                 placeholder="Re-type your password here"
                 onChangeText={handleChange('confirmPassword')}
                 secureTextEntry
+                errors={errors}
+                touched={touched}
               />
 
               <InputWithLabel
@@ -65,6 +71,8 @@ export default function App() {
                 placeholder="Type your dog's name here"
                 value={values.petName}
                 onChangeText={handleChange('petName')}
+                errors={errors}
+                touched={touched}
               />
               
               <InputWithLabel
@@ -73,6 +81,8 @@ export default function App() {
                 placeholder="Type your dog's date of birth here"
                 value={values.petBirthDate}
                 onChangeText={handleChange('petBirthDate')}
+                errors={errors}
+                touched={touched}
               />
 
               <InputWithLabel
@@ -81,6 +91,8 @@ export default function App() {
                 placeholder="Type your dog's breed here"
                 value={values.breed}
                 onChangeText={handleChange('breed')}
+                errors={errors}
+                touched={touched}
               />
 
               <InputWithLabel
@@ -89,6 +101,8 @@ export default function App() {
                 placeholder="Type your dog's favorite toy here"
                 value={values.favouriteToy}
                 onChangeText={handleChange('favouriteToy')}
+                errors={errors}
+                touched={touched}
               />
 
               <Button
@@ -108,13 +122,18 @@ export default function App() {
 };
 
 const InputWithLabel = (props) => {
+
+  const moreStyle = props.errors[props.name] && props.touched[props.name] 
+    ? {borderWidth: 2, borderColor: 'red'} 
+    : {};
+
   return (
     <View style={{ padding: 16 }}>
       <Text style={{padding: 8, fontSize: 18, marginLeft: 10}}>
         {props.label}
       </Text>
       <TextInput
-        style={{padding: 8, fontSize: 16, marginLeft: 10}}
+        style={{padding: 8, fontSize: 16, marginLeft: 11, ...moreStyle}}
         name={props.name}
         onChangeText={props.onChangeText}
         value={props.value}
@@ -122,7 +141,7 @@ const InputWithLabel = (props) => {
         onBlur={props.onBlur}
         secureTextEntry={props.secureTextEntry}
       />
-      <ErrorMessage style={{marginLeft: 18, color: 'red'}} name={props.name} component={Text}/>
+      <ErrorMessage style={{padding: 8, marginLeft: 10, color: 'red'}} name={props.name} component={Text}/>
     </View>
   );
 };
