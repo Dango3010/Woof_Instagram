@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TextInput, Button, ScrollView } from 'react-native';
-import {Formik, FieldArray, ErrorMessage} from 'formik';
+import { View, Text, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
+import {Formik, ErrorMessage} from 'formik';
+import { AntDesign } from '@expo/vector-icons';
 import * as Yup from 'yup';
 
 export default function App() {
@@ -52,6 +53,7 @@ export default function App() {
               <InputWithLabel
                 label='Confirm Password'
                 name='confirmPassword'
+                value={values.confirmPassword}
                 placeholder="Re-type your password here"
                 onChangeText={handleChange('confirmPassword')}
                 secureTextEntry
@@ -94,6 +96,10 @@ export default function App() {
                 onPress={handleSubmit}
                 disabled={isSubmitting}
               />
+              <ResetButton 
+                handleReset={handleReset}
+                disabled={isSubmitting} 
+              />
           </View>
         )}
       </Formik>
@@ -121,3 +127,23 @@ const InputWithLabel = (props) => {
   );
 };
 
+const ResetButton = (props) => {
+  return (
+    <TouchableOpacity
+      accessible={true}
+      accessibilityLabel="Press to reset the form!"
+      onPress={props.handleReset}
+    > 
+      <Text style={{padding: 8, fontSize: 15, marginLeft: 10}}>
+        Click here to reset the Form!
+        <View style={{paddingLeft: 6}}>
+          <AntDesign
+            size={25}
+            name="closecircleo"
+            color="black"
+          />
+        </View>
+      </Text>
+    </TouchableOpacity>
+  )
+}
