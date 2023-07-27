@@ -9,9 +9,13 @@ export default function App() {
     <ScrollView style={{backgroundColor: '#ecf0f1'}}>
       <Text style={{marginTop: 50, fontSize: 20, textAlign: 'center'}}>Registration</Text>
         <Formik
-          initialValues={{email: '', password: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
+          initialValues={{email: '', password: '', confirmPassword: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
           validationSchema={Yup.object({
-            email: Yup.string().email('Invalid email address').required('Required')
+            email: Yup.string().email('Invalid email address').required('Required'),
+            password: Yup.string().required('Required'),
+            confirmPassword: Yup.string()
+              .required('Required')
+              .oneOf([Yup.ref('password')], 'Passwords do not match, please try again.')
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -45,11 +49,13 @@ export default function App() {
 
               <InputWithLabel
                 label='Confirm Password'
+                name='confirmPassword'
                 placeholder="Re-type your password here"
+                onChangeText={handleChange('confirmPassword')}
+                onBlur={handleBlur('confirmPassword')}
                 secureTextEntry
               />
-              {/* <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='password' component={Text}/>
-                Passwords do not match, please try again. */}
+              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='confirmPassword' component={Text}/>
 
               <InputWithLabel
                 label="Name"
