@@ -1,27 +1,18 @@
 import React from 'react';
 import { View, Text, TextInput, Button, ScrollView } from 'react-native';
 import {Formik, FieldArray, ErrorMessage} from 'formik';
+import * as Yup from 'yup';
 
 export default function App() {
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
-      errors.email = 'Invalid Email Address';
-    } 
-    return errors;
-  }
   
   return (
     <ScrollView style={{backgroundColor: '#ecf0f1'}}>
       <Text style={{marginTop: 50, fontSize: 20, textAlign: 'center'}}>Registration</Text>
         <Formik
           initialValues={{email: '', password: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
-          validate={validate}
+          validationSchema={Yup.object({
+            email: Yup.string().email('Invalid email address').required('Required')
+          })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -122,6 +113,5 @@ const InputWithLabel = (props) => {
     </View>
   );
 };
-
 
 
