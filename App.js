@@ -15,7 +15,11 @@ export default function App() {
             password: Yup.string().required('Required'),
             confirmPassword: Yup.string()
               .required('Required')
-              .oneOf([Yup.ref('password')], 'Passwords do not match, please try again.')
+              .oneOf([Yup.ref('password')], 'Passwords do not match, please try again.'),
+            petName: Yup.string().required('Required'),
+            petBirthDate: Yup.string().required('Required'),
+            breed: Yup.string().required('Required'),
+            favouriteToy: Yup.string().required('Required')
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -34,7 +38,6 @@ export default function App() {
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
               />
-              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='email' component={Text}/>
               
               <InputWithLabel
                 label='Password'
@@ -45,17 +48,14 @@ export default function App() {
                 onBlur={handleBlur('password')}
                 secureTextEntry
               />
-              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='password' component={Text}/>
 
               <InputWithLabel
                 label='Confirm Password'
                 name='confirmPassword'
                 placeholder="Re-type your password here"
                 onChangeText={handleChange('confirmPassword')}
-                onBlur={handleBlur('confirmPassword')}
                 secureTextEntry
               />
-              <ErrorMessage style={{marginLeft: 35, color: 'red'}} name='confirmPassword' component={Text}/>
 
               <InputWithLabel
                 label="Name"
@@ -116,8 +116,8 @@ const InputWithLabel = (props) => {
         onBlur={props.onBlur}
         secureTextEntry={props.secureTextEntry}
       />
+      <ErrorMessage style={{marginLeft: 18, color: 'red'}} name={props.name} component={Text}/>
     </View>
   );
 };
-
 
