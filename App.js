@@ -17,7 +17,7 @@ const Heading = (props) => (
 );
 
 const Title = (props) => (
-  <Text style={styles.title}>
+  <Text style={props.style}>
     {props.name}
   </Text>
 );
@@ -30,10 +30,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
-    margin: 8
-  },
-  title: {
-    margin: 7
+    margin: 8,
+    fontWeight: 'bold'
   },
 });
 
@@ -42,7 +40,10 @@ const styles = StyleSheet.create({
 const WoofCard = (props) => (
   <View style={woofCardStyles.card}>
     <Avatar url={props.url}/>
-    <Title name={props.name}/>
+    <Title 
+      name={props.name}
+      style={woofCardStyles.title}
+    />
   </View>
 );
 
@@ -59,25 +60,56 @@ const woofCardStyles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center',
   },
-  title: {},
+  title: {
+    margin: 7,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  }
 });
 
 const WoofPost = (props) => (
-  <View>
-    <Image source={{ uri: 'todo' }} />
-    <View>
-      <Text>todo</Text>
-      <Text>todo</Text>
+  <View style={woofPostStyles.layout}>
+    <Image 
+      style={woofPostStyles.image} 
+      source={{ uri: props.url }}
+    />
+
+    <View style={woofPostStyles.content}>
+      <Text style={woofPostStyles.title}>
+        {props.title}
+      </Text>
+      <Text style={woofPostStyles.description}>
+        {props.description}
+      </Text>
     </View>
   </View>
 );
 
 const woofPostStyles = StyleSheet.create({
-  layout: {},
-  image: {},
-  content: {},
-  title: {},
-  description: {},
+  layout: {
+    height: 113,
+    margin: 5,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  image: {
+    flex: 1,
+    width: 200,
+    height: 100,
+    borderRadius: 44/2,
+    margin: 10
+  },
+  content: {
+    flex: 2,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+  description: {
+  },
 });
 
 // The screen rendering everything
@@ -85,12 +117,24 @@ const HomeScreen = () => (
   <ScrollView style={{marginTop: 50}}>
     <Heading>Trending Woofs</Heading>
     <ScrollView horizontal={true}>
-      <WoofCard url="https://picsum.photos/64/64" name='REX'/>
-      <WoofCard url="https://picsum.photos/64/64" name='DANGO'/>
-      <WoofCard url="https://picsum.photos/64/64" name='DANGO 2'/>
-      <WoofCard url="https://picsum.photos/64/64" name='DANGO 3'/>
-      <WoofCard url="https://picsum.photos/64/64" name='DANGO 4'/>
+      {data.woofs.map(woof => (
+        <WoofCard 
+          key={woof.id}
+          url={woof.avatar}
+          name={woof.name}
+        />
+      ))}
     </ScrollView>
+
+    <Heading>New Woof Posts</Heading>
+    {data.posts.map(post => (
+      <WoofPost
+        key={post.id}
+        url={post.image}
+        title={post.title}
+        description={post.description}
+      />
+    ))}
   </ScrollView>
 );
 
