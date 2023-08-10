@@ -122,35 +122,10 @@ const HomeScreen = () => {
   
   return (
     <View style={{padding: 8}}>
-      {/* <Heading>Trending Woofs</Heading>
-      <FlatList
-        horizontal
-        data={data2.woofs}
-        keyExtractor={(item) => item.id}
-        renderItem={({item}) => (
-          <WoofCard
-            url={item.avatar}
-            name={item.name}
-          />
-        )}
-      />
-
-      <SectionList
-        sections={sections}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item}) => (
-          <WoofPost
-            url={item.image}
-            title={item.title}
-            description={item.description}
-          />
-        )}
-      /> */}
-
       <SectionList
         sections={sections}
         renderItem={({item})=> {
-          if (item.title) {
+          if (item.title) { //find the unique property of the woofs and posts to render them separately; woofs array has 'name' porperty, while posts array has 'title' property
             return (
               <WoofPost
                 url={item.image}
@@ -161,9 +136,9 @@ const HomeScreen = () => {
           }
         }}
         renderSectionHeader={({section}) => (<Heading>{section.header}</Heading>)}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id} //item = each obj of the nested array
         renderSectionFooter={({ section }) =>
-          section.title === 'Woofs' && (
+          section.title === 'Woofs' && ( //Woofs list won't have header-content-footer, it will only have header-footer => footer practically became the content component
             <FlatList
               data={section.data}
               renderItem={({item}) => (
@@ -277,25 +252,8 @@ const data2 = {
       caretaker: 'Jamie Street',
       source: 'https://unsplash.com/photos/wcO2PWLuQ3U',
     },
-    {
-      id: 'post-777',
-      image: 'https://images.unsplash.com/photo-1567014543648-e4391c989aab?auto=format&fit=crop&w=1050&q=80',
-      title: 'Sleepy Woofs',
-      description: 'Sleeping is just as important for woofs as it is for humans. What are the main things your woof dreams about.',
-      caretaker: 'Max Singh',
-      source: 'https://unsplash.com/photos/2637Pic9xMw',
-    },
-    {
-      id: 'post-888',
-      image: 'https://images.unsplash.com/photo-1567014543648-e4391c989aab?auto=format&fit=crop&w=1050&q=80',
-      title: 'Sleepy Woofs',
-      description: 'Sleeping is just as important for woofs as it is for humans. What are the main things your woof dreams about.',
-      caretaker: 'Max Singh',
-      source: 'https://unsplash.com/photos/2637Pic9xMw',
-    }
   ],
 };
-
 
 
 
