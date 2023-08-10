@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, FlatList, Text, View, StatusBar, SectionList} from 'react-native';
 
 // Basic reusable components
-
 const Avatar = (props) => (
   <Image
     style={styles.avatar}
@@ -33,10 +32,14 @@ const styles = StyleSheet.create({
     margin: 8,
     fontWeight: 'bold'
   },
+  app: {
+    flex: 1, 
+    backgroundColor: '#FAF9FA', 
+    marginTop: StatusBar.currentHeight || 0
+  }
 });
 
 // App-specific components
-
 const WoofCard = (props) => (
   <View style={woofCardStyles.card}>
     <Avatar url={props.url}/>
@@ -51,7 +54,7 @@ const woofCardStyles = StyleSheet.create({
   card: {
     width: 100,
     height: 113,
-    backgroundColor: '#FFFFE0',
+    backgroundColor: '#FFFFFF',
     borderRadius: 44/2,
     margin: 5,
     borderColor: 'black',
@@ -108,38 +111,78 @@ const woofPostStyles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase'
   },
-  description: {
-  },
 });
 
 // The screen rendering everything
-const HomeScreen = () => (
-  <ScrollView style={{marginTop: 50}}>
-    <Heading>Trending Woofs</Heading>
-    <ScrollView horizontal={true}>
-      {data.woofs.map(woof => (
-        <WoofCard 
-          key={woof.id}
-          url={woof.avatar}
-          name={woof.name}
-        />
-      ))}
-    </ScrollView>
-
-    <Heading>New Woof Posts</Heading>
-    {data.posts.map(post => (
-      <WoofPost
-        key={post.id}
-        url={post.image}
-        title={post.title}
-        description={post.description}
+const HomeScreen = () => {
+  const sections = [
+    { title: 'Woofs', data: data2.woofs, header: 'Trending Woofs'},
+    { title: 'Posts', data: data2.posts, header: 'New Woof Posts'},
+  ];
+  
+  return (
+    <View style={{padding: 8}}>
+      {/* <Heading>Trending Woofs</Heading>
+      <FlatList
+        horizontal
+        data={data2.woofs}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => (
+          <WoofCard
+            url={item.avatar}
+            name={item.name}
+          />
+        )}
       />
-    ))}
-  </ScrollView>
-);
+
+      <SectionList
+        sections={sections}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item}) => (
+          <WoofPost
+            url={item.image}
+            title={item.title}
+            description={item.description}
+          />
+        )}
+      /> */}
+
+      <SectionList
+        sections={sections}
+        renderItem={({item})=> {
+          if (item.title) {
+            return (
+              <WoofPost
+                url={item.image}
+                title={item.title}
+                description={item.description}
+              />
+            );
+          }
+        }}
+        renderSectionHeader={({section}) => (<Heading>{section.header}</Heading>)}
+        keyExtractor={(item) => item.id}
+        renderSectionFooter={({ section }) =>
+          section.title === 'Woofs' && (
+            <FlatList
+              data={section.data}
+              renderItem={({item}) => (
+                <WoofCard
+                  url={item.avatar}
+                  name={item.name}
+                />
+              )}
+              horizontal
+              keyExtractor={(item) => item.id}
+            />)
+        }
+      />
+    </View>
+  );
+};
 
 const App = () => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: '#FAF9FA' }}>
+  <SafeAreaView style={styles.app}>
     <HomeScreen />
   </SafeAreaView>
 );
@@ -147,7 +190,7 @@ const App = () => (
 export default App;
 
 // "Fake" API data to use in your app
-const data = {
+const data2 = {
   woofs: [
     {
       id: 'woof-1', 
@@ -234,5 +277,27 @@ const data = {
       caretaker: 'Jamie Street',
       source: 'https://unsplash.com/photos/wcO2PWLuQ3U',
     },
+    {
+      id: 'post-777',
+      image: 'https://images.unsplash.com/photo-1567014543648-e4391c989aab?auto=format&fit=crop&w=1050&q=80',
+      title: 'Sleepy Woofs',
+      description: 'Sleeping is just as important for woofs as it is for humans. What are the main things your woof dreams about.',
+      caretaker: 'Max Singh',
+      source: 'https://unsplash.com/photos/2637Pic9xMw',
+    },
+    {
+      id: 'post-888',
+      image: 'https://images.unsplash.com/photo-1567014543648-e4391c989aab?auto=format&fit=crop&w=1050&q=80',
+      title: 'Sleepy Woofs',
+      description: 'Sleeping is just as important for woofs as it is for humans. What are the main things your woof dreams about.',
+      caretaker: 'Max Singh',
+      source: 'https://unsplash.com/photos/2637Pic9xMw',
+    }
   ],
 };
+
+
+
+
+
+
