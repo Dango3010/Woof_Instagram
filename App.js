@@ -54,11 +54,15 @@ const woofCardStyles = StyleSheet.create({
   card: {
     width: 100,
     height: 113,
+    //box-shadow on the <WoofCard> for both Android and iOS
+    elevation: 9,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1.5 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
     backgroundColor: '#FFFFFF',
     borderRadius: 44/2,
-    margin: 5,
-    borderColor: 'black',
-    borderWidth: 2,
+    margin: 10,
     flex: 1,
     alignItems: 'center', 
     justifyContent: 'center',
@@ -124,6 +128,8 @@ const HomeScreen = () => {
     <View style={{padding: 8}}>
       <SectionList
         sections={sections}
+        keyExtractor={(item) => item.id} //item = each obj of the nested array
+        renderSectionHeader={({section}) => (<Heading>{section.header}</Heading>)}
         renderItem={({item})=> {
           if (item.title) { //find the unique property of the woofs and posts to render them separately; woofs array has 'name' porperty, while posts array has 'title' property
             return (
@@ -135,8 +141,6 @@ const HomeScreen = () => {
             );
           }
         }}
-        renderSectionHeader={({section}) => (<Heading>{section.header}</Heading>)}
-        keyExtractor={(item) => item.id} //item = each obj of the nested array
         renderSectionFooter={({ section }) =>
           section.title === 'Woofs' && ( //Woofs list won't have header-content-footer, it will only have header-footer => footer practically became the content component
             <FlatList
