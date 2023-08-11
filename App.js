@@ -81,7 +81,9 @@ const SignUpScreen = () => (
 )
 
 const StackNavigation = () => (
-  <Stack.Navigator>
+  <Stack.Navigator 
+    screenOptions={{headerMode: 'none'}}
+  >
     <Stack.Screen
       name='Sign In'
       component={SignInScreen}
