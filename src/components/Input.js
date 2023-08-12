@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
 //render each input of the form
-export default InputWithLabel = (props) => {
+export default function InputWithLabel (props) {
 
   const moreStyle = props.errors[props.name] && props.touched[props.name] 
     ? {borderWidth: 2, borderColor: 'red'} 

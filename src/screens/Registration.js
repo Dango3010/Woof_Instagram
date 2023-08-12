@@ -1,9 +1,10 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { Button, ScrollView, Text, View } from 'react-native';
+import { Button, StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import InputWithLabel from '../components/Input'
 import ResetButton from '../components/ResetButton'
+import buttonStyles from '../styles/buttonStyle'
 import styles from '../styles/generalStyles'
 
 export default function RegistrationScreen() {
@@ -107,11 +108,13 @@ export default function RegistrationScreen() {
                 touched={touched}
               />
 
-              <Button
-                title='Submit'
-                onPress={handleSubmit}
-                disabled={isSubmitting}
-              />
+              <View style={buttonStyles.submitButton}>
+                <Button
+                  title='Submit'
+                  onPress={handleSubmit}
+                  disabled={isSubmitting}
+                />
+              </View>
               <ResetButton 
                 handleReset={handleReset}
                 disabled={isSubmitting} 
@@ -122,4 +125,3 @@ export default function RegistrationScreen() {
     </ScrollView>
   );
 };
-

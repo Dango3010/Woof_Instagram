@@ -1,24 +1,17 @@
-import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity} from 'react-native';
+import buttonStyles from '../styles/buttonStyle'
 
-export default ResetButton = (props) => {
+export default function ResetButton (props) {
   return (
     <TouchableOpacity
       accessible={true}
       accessibilityLabel="Press to reset the form!"
       onPress={props.handleReset}
+      style={buttonStyles.resetButton}
     > 
-      <Text style={{padding: 8, fontSize: 15, marginLeft: 10}}>
-        Click here to reset the Form!
-        <View style={{paddingLeft: 6}}>
-          <AntDesign
-            size={25}
-            name="closecircleo"
-            color="black"
-          />
-        </View>
-      </Text>
+      <Text style={buttonStyles.text}>RESET THE FORM</Text>
     </TouchableOpacity>
   )
 }
+

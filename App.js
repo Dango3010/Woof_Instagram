@@ -13,7 +13,9 @@ const App = () => {
   
   return (
     <AuthContext.Provider value={{hasUser, setUser}}>
+    <>
       <RegistrationScreen />
+    </>
     </AuthContext.Provider>
   );
 }
