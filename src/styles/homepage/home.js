@@ -1,4 +1,4 @@
-import {StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const homeStyles = StyleSheet.create({
   avatar: {
@@ -13,11 +13,10 @@ const homeStyles = StyleSheet.create({
   },
   home: {
     flex: 1, 
-    backgroundColor: '#FAF9FA', 
-    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: '#FAF9FA',
     padding: 8
   },
-  authenPage: {
+  authenPage: { //applies to the backgrounds of Login and Registration screens
     flex: 1, 
     backgroundColor: '#FAF9FA', 
   }

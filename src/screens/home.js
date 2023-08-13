@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FlatList, SafeAreaView, SectionList} from 'react-native';
+import { FlatList, SafeAreaView, SectionList, Text, View} from 'react-native';
 import { data } from '../fake-API/dog-info'
-import homeStyles from '../../src/styles/homepage/home'
+import homeStyles from '../styles/homepage/home'
 import Heading from '../components/homepage/Heading'
 import WoofPost from '../components/homepage/Woofpost'
 import WoofCard from '../components/homepage/Woofcard'
@@ -30,7 +30,7 @@ export default function HomeScreen () {
           }
         }}
         renderSectionFooter={({ section }) =>
-          section.title === 'Woofs' && ( 
+          section.title === 'Woofs' && (
             <FlatList
               data={section.data}
               renderItem={({item}) => (

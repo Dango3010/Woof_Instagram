@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import woofPostStyles from '../../styles/homepage/WoofPostStyle';
+import woofPostStyles from '../../styles/homepage/woofPostStyle';
 
 export default function WoofPost (props) {
   return (
