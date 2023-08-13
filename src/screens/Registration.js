@@ -1,16 +1,21 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { Button, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import InputWithLabel from '../components/Input'
-import ResetButton from '../components/ResetButton'
-import buttonStyles from '../styles/buttonStyle'
+import Button from '../components/Button'
 import styles from '../styles/generalStyles'
+import homeStyles from '../styles/homepage/home';
 
-export default function RegistrationScreen() {
-  
+export default function RegistrationScreen(props) {
+  const nav = props.navigation;
+
+  function navigate () {
+    return nav.navigate('Home')
+  }
+
   return (
-    <ScrollView style={{flex: 1, backgroundColor: '#ecf0f1'}}>
+    <ScrollView style={homeStyles.authenPage}>
       <Text style={styles.title}>Registration</Text>
         <Formik
           initialValues={{email: '', password: '', confirmPassword: '', petName: '', petBirthDate: '', breed: '', favouriteToy: ''}}
@@ -27,8 +32,8 @@ export default function RegistrationScreen() {
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
+              navigate();
             }, 400);
           }}
         >
@@ -108,15 +113,16 @@ export default function RegistrationScreen() {
                 touched={touched}
               />
 
-              <View style={buttonStyles.submitButton}>
-                <Button
-                  title='Submit'
-                  onPress={handleSubmit}
-                  disabled={isSubmitting}
-                />
-              </View>
-              <ResetButton 
-                handleReset={handleReset}
+              <Button
+                name='Submit'
+                purpose={'Submit'}
+                onPress={handleSubmit}
+                disabled={isSubmitting}
+              />
+              <Button 
+                name='reset the form'
+                purpose={'reset'}
+                onPress={handleReset}
                 disabled={isSubmitting} 
               />
           </View>

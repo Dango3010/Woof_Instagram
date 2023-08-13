@@ -1,15 +1,20 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import * as Yup from 'yup'; //to validate the inputs
 import InputWithLabel from '../components/Input'
+import Button from '../components/Button'
 import styles from '../styles/generalStyles'
+import homeStyles from '../styles/generalStyles'
+import users from '../fake-API/users'
 
-export default function LogInScreen() {
+export default function LogInScreen(props) {
+
+  const nav = props.navigation;
   
   return (
-    <View style={{flex: 1, backgroundColor: '#ecf0f1'}}>
-      <Text style={styles.title}>Log In</Text>
+    <ScrollView style={homeStyles.authenPage}>
+      <Text style={styles.title}>Welcome! Please Log In</Text>
         <Formik
           initialValues={{email: '', password: ''}}
           validationSchema={Yup.object({
@@ -18,8 +23,10 @@ export default function LogInScreen() {
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
+              users.findIndex(user => user.email === values.email && user.password === values.password) < 0
+                ? alert('Invalid User, Please Try Again') 
+                : nav.navigate('Home');
             }, 400);
           }}
         >
@@ -49,13 +56,17 @@ export default function LogInScreen() {
               />
 
               <Button
-                title='Submit'
+                name='Submit'
                 onPress={handleSubmit}
                 disabled={isSubmitting}
+              />
+              <Button
+                name='Register'
+                onPress={() => nav.navigate('Register')}
               />
           </View>
         )}
       </Formik>
-    </View>
+    </ScrollView>
   );
 };

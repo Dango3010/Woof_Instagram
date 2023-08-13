@@ -9,12 +9,17 @@ const homeStyles = StyleSheet.create({
   heading: {
     fontSize: 20,
     margin: 8,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   home: {
     flex: 1, 
     backgroundColor: '#FAF9FA', 
-    marginTop: StatusBar.currentHeight || 0
+    marginTop: StatusBar.currentHeight || 0,
+    padding: 8
+  },
+  authenPage: {
+    flex: 1, 
+    backgroundColor: '#FAF9FA', 
   }
 });
 

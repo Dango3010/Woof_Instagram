@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { FlatList, View, SectionList} from 'react-native';
+import { FlatList, SafeAreaView, SectionList} from 'react-native';
 import { data } from '../fake-API/dog-info'
+import homeStyles from '../../src/styles/homepage/home'
 import Heading from '../components/homepage/Heading'
 import WoofPost from '../components/homepage/Woofpost'
 import WoofCard from '../components/homepage/Woofcard'
@@ -12,7 +13,7 @@ export default function HomeScreen () {
   ];
   
   return (
-    <View style={{padding: 8}}>
+    <SafeAreaView style={homeStyles.home}>
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.id} //item = each obj of the nested array
@@ -43,7 +44,7 @@ export default function HomeScreen () {
             />)
         }
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

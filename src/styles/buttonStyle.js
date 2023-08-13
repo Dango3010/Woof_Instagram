@@ -1,31 +1,21 @@
 import { StyleSheet } from 'react-native';
 
 const buttonStyles = StyleSheet.create({
-  submitButton: {
-    width: 150, 
-    marginLeft: 130
-  },
   text: {
     fontSize: 14, 
     fontWeight: 'bold', 
-    color: '#FFFFFF', 
-    marginLeft: 10
+    textTransform: 'uppercase',
+    textAlign: 'center'
   },
-  resetButton: {    
+  button: {    
     marginTop: 17,
-    width: 150,
+    width: 170,
     marginLeft: 130,
     height: 40, 
-    backgroundColor: '#666666',
+    backgroundColor: '#f6f0bc',
     flex: 1,
     justifyContent: 'center', 
     padding: 2,
-    //box-shadow in Android and iOS  
-    elevation: 9,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1.5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
   }
 });
 

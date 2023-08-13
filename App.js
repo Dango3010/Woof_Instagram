@@ -1,24 +1,13 @@
-import React, {createContext, useContext, useState} from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
-import LogInScreen from './src/screens/Login'
-import RegistrationScreen from './src/screens/Registration'
-import homeStyles from './src/styles/homepage/home'
-import HomeScreen from './src/screens/home'
-
-export const AuthContext = createContext({
-  hasUser: false,
-  setUser: () => {},
-});
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './src/navigation';
 
 const App = () => {
-  const [hasUser, setUser] = useState(false);
   
   return (
-    <AuthContext.Provider value={{hasUser, setUser}}>
-      <SafeAreaView style={homeStyles.home}>
-        <HomeScreen />
-      </SafeAreaView>
-    </AuthContext.Provider>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
 }
 
