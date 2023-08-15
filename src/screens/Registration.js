@@ -10,10 +10,6 @@ import users from '../fake-API/users';
 export default function RegistrationScreen(props) {
   const nav = props.navigation;
 
-  function navigate() {
-    return nav.navigate('Home')
-  }
-
   return (
     <ScrollView style={homeStyles.authenPage}>
       <Formik
@@ -31,9 +27,10 @@ export default function RegistrationScreen(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            alert(JSON.stringify(values, null, 2)); //show the data sent to the back-end by clicking on the submit button
             setSubmitting(false); //disable the submit btutton while sending data
-            users.push(values); //add more users to the users obj
-            navigate(); //navigate to the home page
+            users.push({email: values.email, password: values.password}); //add the new user to the users obj
+            nav.navigate('Home'); //navigate to the home page
           }, 400);
         }}
       >
