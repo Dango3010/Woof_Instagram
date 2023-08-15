@@ -11,7 +11,7 @@ export default function InputWithLabel (props) {
 
   return (
     <View style={{ padding: 16 }}>
-      <Text style={{padding: 8, fontSize: 18, marginLeft: 10}}>
+      <Text style={{padding: 8, fontSize: 18, marginLeft: 10, fontWeight: 'bold'}}>
         {props.label}
       </Text>
       <TextInput

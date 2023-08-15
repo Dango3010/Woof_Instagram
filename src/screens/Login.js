@@ -7,7 +7,7 @@ import Button from '../components/Button'
 import homeStyles from '../styles/homepage/home'
 import users from '../fake-API/users'
 
-const image = require('../image/dog-background.png');
+const image = require('../image/shiba.png');
 
 export default function LogInScreen(props) {
 
@@ -68,7 +68,7 @@ export default function LogInScreen(props) {
         )}
       </Formik>
       <Image
-        style={{ margin: 90 }}
+        style={{ height: 250, width: 250, resizeMode: 'contain', margin: 75}}
         source={image}
       />
     </ScrollView>

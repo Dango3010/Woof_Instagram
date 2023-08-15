@@ -13,12 +13,12 @@ const homeStyles = StyleSheet.create({
   },
   home: {
     flex: 1, 
-    backgroundColor: '#FAF9FA',
+    backgroundColor: '#F6F0BC',
     padding: 8
   },
   authenPage: { //applies to the backgrounds of Login and Registration screens
     flex: 1, 
-    backgroundColor: '#FAF9FA'
+    backgroundColor: '#F6F0BC'
   }
 });
 

@@ -10,7 +10,7 @@ const woofCardStyles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1.5 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#D9D9D9',
     borderRadius: 44/2,
     margin: 10,
     flex: 1,
