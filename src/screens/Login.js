@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import InputWithLabel from '../components/InputWithLabel'
 import Button from '../components/Button'
 import homeStyles from '../styles/homepage/home'
+import iconStyle from '../styles/iconStyle'
 import users from '../fake-API/users'
 
 const image = require('../image/shiba.png');
@@ -68,7 +69,7 @@ export default function LogInScreen(props) {
         )}
       </Formik>
       <Image
-        style={{ height: 250, width: 250, resizeMode: 'contain', margin: 75}}
+        style={iconStyle}
         source={image}
       />
     </ScrollView>
