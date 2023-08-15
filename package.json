@@ -21,6 +21,8 @@
     "react-art": "^18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
+    "react-native-linear-gradient": "^2.8.2",
+    "react-native-vector-icons": "^10.0.0",
     "react-native-web": "^0.18.12",
     "yup": "^1.2.0"
   },

@@ -1,11 +1,13 @@
 import React from 'react';
 import * as Yup from 'yup'; //to validate the inputs
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Image } from 'react-native';
 import { Formik } from 'formik';
 import InputWithLabel from '../components/InputWithLabel'
 import Button from '../components/Button'
 import homeStyles from '../styles/homepage/home'
 import users from '../fake-API/users'
+
+const image = require('../image/dog-background.png');
 
 export default function LogInScreen(props) {
 
@@ -65,6 +67,10 @@ export default function LogInScreen(props) {
           </View>
         )}
       </Formik>
+      <Image
+        style={{ margin: 90 }}
+        source={image}
+      />
     </ScrollView>
   );
 };

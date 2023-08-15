@@ -18,7 +18,7 @@ const homeStyles = StyleSheet.create({
   },
   authenPage: { //applies to the backgrounds of Login and Registration screens
     flex: 1, 
-    backgroundColor: '#FAF9FA', 
+    backgroundColor: '#FAF9FA'
   }
 });
 

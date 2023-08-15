@@ -1,7 +1,7 @@
 const screenHeader = {
   headerStyle: {backgroundColor: '#f6f0bc'},
   title: 'Welcome! Please Log In',
-  headerTitleAlign: 'center'
+  headerTitleAlign: 'center',
 };
 
 export default screenHeader;

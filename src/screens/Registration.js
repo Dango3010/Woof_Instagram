@@ -31,9 +31,9 @@ export default function RegistrationScreen(props) {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            setSubmitting(false);
-            users.push(values);
-            navigate();
+            setSubmitting(false); //disable the submit btutton while sending data
+            users.push(values); //add more users to the users obj
+            navigate(); //navigate to the home page
           }, 400);
         }}
       >
