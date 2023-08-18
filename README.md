@@ -3,13 +3,13 @@
 Introduce you to WoofInstagram, a mobile app everyone can install on Android or iOS phones. It allows you to register for an account for your dog and view other users' dog pictures and brief descriptions of their dogs.
 <br></br>
 
-### Overview
+## Overview
+https://github.com/Dango3010/Woof_Instagram/assets/114049732/b5b04aba-3ff0-481a-aec3-59eb8b5ccc99
 
-
-## to get started
+## To get started
 ```bash
-  git clone 
-  cd 
+  git clone git@github.com:Dango3010/Woof_Instagram.git
+  cd Woof_Instagram
   npm install
   npm run web
 ```
@@ -19,6 +19,7 @@ To view the app on a phone in development mode:
 1. Install `Expo Go` app on Play Store / App Store
 2. Open Expo Go app on your Android/iOS
 3. scan the code that appears on your terminal after running `npm run web`
+
 => The app will be downloaded and appear on your phone
 
 ## Tech Stack
