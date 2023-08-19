@@ -3,10 +3,12 @@
 Introduce you to WoofInstagram, a mobile app everyone can install on Android or iOS phones. It allows you to register for an account for your dog and view other users' dog pictures and brief descriptions of their dogs.
 <br></br>
 
-## Overview
-https://github.com/Dango3010/Woof_Instagram/assets/114049732/b5b04aba-3ff0-481a-aec3-59eb8b5ccc99
+## Tech Stack
+
+React Native, Expo, Formik, Yup
 
 ## To get started
+
 ```bash
   git clone git@github.com:Dango3010/Woof_Instagram.git
   cd Woof_Instagram
@@ -22,9 +24,9 @@ To view the app on a phone in development mode:
 
 => The app will be downloaded and appear on your phone
 
-## Tech Stack
+## Overview
 
-React Native, Expo, Formik, Yup
+https://github.com/Dango3010/Woof_Instagram/assets/114049732/c41ec4cf-2902-4b8c-84fc-1b41dda36779
 
 ## Dependencies
 
